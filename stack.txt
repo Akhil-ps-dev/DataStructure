@@ -1,74 +1,62 @@
 #include<stdio.h>
-int stack[10],choice,n,top,item,i;
+
+int stack[10], choice, n, top, item, i;
 void push();
 void pop();
 
-void main()
-{
- top = -1;
- printf("\n Enter the size of STACK : ");
- scanf("%d",&n);
- printf("\n1.PUSH\n2.POP\n3.EXIT\n");
- do
- {
- printf("\nEnter the choice: ");
- scanf("%d",&choice);
- switch(choice)
- {
- case 1:
- {
- push();
- break;
- }
- case 2:
- {
- pop();
- break;
- }
- case 3:
- {
+void main() {
+  top = -1;
+  printf("\n Enter the size of STACK : ");
+  scanf("%d", & n);
+  printf("\n1.PUSH\n2.POP\n3.EXIT\n");
+  do {
+    printf("\nEnter the choice: ");
+    scanf("%d", & choice);
+    switch (choice) {
+    case 1: {
+      push();
+      break;
+    }
+    case 2: {
+      pop();
+      break;
+    }
+    case 3: {
 
- break;
- }
- 
- default:
- {
- printf ("\nInvalid Choice\n");
- }
- 
- }
- printf("Elements in stack\n");
- for(i=top;i>=0;i--)
- {
-     printf("%d\n",stack[i]);
- }}
- 
- while(choice!=4);
+      break;
+    }
+
+    default: {
+      printf("\nInvalid Choice\n");
+    }
+
+    }
+    printf("Elements in stack\n");
+    for (i = top; i >= 0; i--) {
+      printf("%d\n", stack[i]);
+    }
+  }
+
+  while (choice != 4);
 }
 
-void push()
-{
- if(top >= n - 1)        
- {
- printf("\nSTACK OVERFLOW\n");    
- }
- else
- {
- top++;    
- printf("Enter a value to be pushed : ");
- scanf("%d",&item);
- stack[top] = item;  
- }}
+void push() {
+  if (top >= n - 1) {
+    printf("\nSTACK OVERFLOW\n");
+  } else {
+    top++;
+    printf("Enter a value to be pushed : ");
+    scanf("%d", & item);
+    stack[top] = item;
+  }
+}
 
-void pop()
-{
- if(top == -1)
- {
- printf("\nSTACK UNDERFLOW\n");
- }
- else
- {
- item=stack[top];    
- printf("The popped element is %d\n",stack[top]);  
- top--;    
- }}
+void pop() {
+  if (top == -1) {
+    printf("\nSTACK UNDERFLOW\n");
+  } else {
+    item = stack[top];
+    printf("The popped element is %d\n", stack[top]);
+    top--;
+  }
+}
