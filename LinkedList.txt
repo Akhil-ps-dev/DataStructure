@@ -1,0 +1,398 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+struct node
+{
+    int id;
+    char category[10];
+    char date[50];
+    struct node *LINK;
+
+} book;
+struct node *ptr, *new, *current, *prev, *HEADER = NULL;
+
+int k = 0;
+
+
+
+void create_node()
+
+{
+
+    if(HEADER == NULL)
+
+    {
+
+        HEADER = (struct node*)malloc(sizeof(struct node));
+
+        new = HEADER;
+
+        HEADER ->LINK = NULL;
+
+        if(HEADER == NULL)
+
+        {
+
+            printf("Node not created");
+
+        }
+
+    }
+
+    else
+
+    {
+
+        new = (struct node*)malloc(sizeof(struct node));
+
+        k = 1;
+
+        if(new == NULL)
+
+        {
+
+            printf("Node not created");
+
+        }
+
+    }
+
+   
+
+}
+
+
+
+void traverse_SL()
+
+{
+
+    ptr = HEADER;
+
+    while (ptr != NULL)
+
+    {
+if(!(strcmp(ptr->category, "storybook")))
+
+{
+
+
+
+        printf("book_id: %d\nbook_category: %s\nIssue_date: %s\n",ptr ->id, ptr ->category, ptr ->date);
+
+     
+
+        printf("\n");
+
+}  
+   ptr = ptr->LINK;
+}
+
+}
+
+
+
+void insertFront()
+
+{
+
+    create_node();
+
+    if(k == 1)
+
+    {
+
+        new->LINK = HEADER;
+
+        HEADER = new;
+
+    }
+
+    printf("Enter the id, category and date of the book\n");
+
+    printf("book id : \n");
+
+    scanf("%d",&new ->id);
+
+    printf("book category: \n");
+
+    scanf("%s",new ->category);
+
+    printf("Issue date: \n");
+
+    scanf("%s",new ->date);
+
+}
+
+
+
+void insertEnd()
+
+{
+
+    create_node();
+
+    ptr = HEADER;
+
+    while (ptr->LINK != NULL)
+
+    {
+
+        ptr = ptr->LINK;
+
+    }
+
+    new->LINK = NULL;
+
+    ptr->LINK = new;
+
+    printf("Enter the id, category and date of the car\n");
+
+    printf("book id : \n");
+
+    scanf("%d",&new ->id);
+
+    printf("book category: \n");
+
+    scanf("%s",new ->category);
+
+    printf("Issue date: \n");
+
+    scanf("%s",new ->date);
+
+}
+
+
+
+void insertInter()
+
+{
+
+    create_node();
+
+    int KEY;
+
+    printf("Enter key for search:\n");
+
+    scanf("%d", &KEY);
+
+    ptr = HEADER;
+
+    while ((ptr->LINK != NULL) && (ptr->id != KEY))
+
+    {
+
+        ptr = ptr->LINK;
+
+    }
+
+    if (ptr->LINK == NULL)
+
+    {
+
+        printf("Search failed....\n");
+
+    }
+
+    else
+
+    {
+
+        new->LINK = ptr->LINK;
+
+        ptr->LINK = new;
+
+        printf("Enter the id, category and date of the book\n");
+
+        printf("book id :\n");
+
+        scanf("%d",&new ->id);
+
+        printf("book category:\n");
+
+        scanf("%s",new ->category);
+
+        printf("Issue date: \n");
+
+        scanf("%s",new ->date);
+
+    }
+
+}
+
+
+
+void deleteFront()
+
+{
+
+    if (HEADER == NULL)
+
+    {
+
+        printf("list empty\n");
+
+    }
+
+    else
+
+        HEADER = HEADER->LINK;
+
+    printf("node removed from front\n");
+
+}
+
+
+
+void deleteEnd()
+
+{
+
+    current = HEADER;
+
+    prev = HEADER;
+
+    while (current->LINK != NULL)
+
+    {
+
+        prev = current;
+
+        current = current->LINK;
+
+    }
+
+    prev->LINK = NULL;
+
+    printf("node removed from end\n");
+
+}
+
+
+
+void deleteInter()
+
+{
+
+    int KEY;
+
+    printf("Enter key for search:");
+
+    scanf("%d", &KEY);
+
+    current = HEADER;
+
+    prev = HEADER;
+
+    while ((current->LINK != NULL) && (current->id != KEY))
+
+    {
+
+        prev = current;
+
+        current = current->LINK;
+
+    }
+
+    if (current->LINK == NULL)
+
+    {
+
+        printf("Search failed....\n");
+
+    }
+
+    else
+
+    {
+
+        prev->LINK = current->LINK;
+
+        printf("node removed\n");
+
+    }
+
+}
+
+
+
+void main()
+
+{
+
+    int OP;
+
+    char ch;
+
+    printf("1.Insertion at FRONT\n2.Insertion at END\n3.Insertion at INTERMEDIATE\n4.Deleteion at FRONT\n5.Deletion at END\n6.Deletion at INTERMEDIATE\n7.Traverse\n");
+
+    do
+
+    {
+
+        printf("Enter your choice: ");
+
+        scanf("%d", &OP);
+
+        printf("\n");
+
+        switch (OP)
+
+        {
+
+        case 1:
+
+            insertFront();
+
+            break;
+
+        case 2:
+
+            insertEnd();
+
+            break;
+
+        case 3:
+
+            insertInter();
+
+            break;
+
+        case 4:
+
+            deleteFront();
+
+            break;
+
+        case 5:
+
+            deleteEnd();
+
+            break;
+
+        case 6:
+
+            deleteInter();
+
+            break;
+
+        case 7:
+
+            traverse_SL();
+
+            break;
+
+        default:
+
+            printf("INVALID CHOICE!!\n");
+
+        }
+
+        printf("Do you want to continue?(Y/N): \n");
+
+        scanf(" %c", &ch);
+
+    } while (ch == 'Y');
+
+}
