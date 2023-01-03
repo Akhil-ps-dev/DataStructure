@@ -1,0 +1,172 @@
+#include<stdio.h>
+
+#include<stdlib.h>
+
+struct node {
+  int coeff;
+  int exp;
+  struct node * link;
+}* PHEADER, * QHEADER, * RHEADER, * new, * ptr, * temp, * Pptr, * Qptr, * Rptr, * HEADER;
+
+
+
+struct node * insert(struct node * HEADER, int co, int ex) {
+
+  if (HEADER == NULL)
+  {
+    new = (struct node * ) malloc(sizeof(struct node));
+    new -> coeff = co;
+    new -> exp = ex;
+    new -> link = NULL;
+    HEADER = new;
+  }
+
+  else
+  {
+    ptr = HEADER;
+    while (ptr -> link != NULL)
+    {
+      ptr = ptr -> link;
+    }
+    temp = (struct node * ) malloc(sizeof(struct node));
+    temp -> coeff = co;
+    temp -> exp = ex;
+    temp -> link = NULL;
+    ptr -> link = temp;
+  }
+  return HEADER;
+}
+
+
+struct node * create(struct node * HEADER)
+{
+  int i, n, ex, co;
+  printf("\nEnter number of terms:");
+  scanf("%d", & n);
+  for (i = 1; i <= n; i++) {
+    printf("Enter coeff of term %d:\n", i);
+    scanf("%d", & co);
+
+    printf("enter expo of term %d:\n", i);
+    scanf("%d", & ex);
+    HEADER = insert(HEADER, co, ex);
+  }
+  return HEADER;
+}
+
+
+
+struct node * polyadd(struct node * HEADER1, struct node * HEADER2, struct node * HEADER3)
+ {
+  Pptr = HEADER1;
+  Qptr = HEADER2;
+  while (Pptr != NULL && Qptr != NULL)
+  {
+   
+    if (HEADER3 == NULL)
+    {
+      HEADER3 = (struct node * ) malloc(sizeof(struct node));
+      Rptr = HEADER3;
+    }
+   
+    else
+    {
+      Rptr -> link = (struct node * ) malloc(sizeof(struct node));
+      Rptr = Rptr -> link;
+    }
+   
+    if (Pptr -> exp == Qptr -> exp)
+    {
+      Rptr -> coeff = Pptr -> coeff + Qptr -> coeff;
+      Rptr -> exp = Pptr -> exp;
+      Pptr = Pptr -> link;
+      Qptr = Qptr -> link;
+      HEADER = insert(HEADER, Rptr -> coeff, Rptr -> exp);
+    }
+   
+   
+    else if (Pptr -> exp > Qptr -> exp)
+    {
+      Rptr -> coeff = Pptr -> coeff;
+      Rptr -> exp = Pptr -> exp;
+      Pptr = Pptr -> link;
+      HEADER = insert(HEADER, Rptr -> coeff, Rptr -> exp);
+    }
+   
+    else
+    {
+      Rptr -> coeff = Qptr -> coeff;
+      Rptr -> exp = Qptr -> exp;
+      Qptr = Qptr -> link;
+      HEADER = insert(HEADER, Rptr -> coeff, Rptr -> exp);
+    }
+  }
+ 
+  if (Pptr == NULL)
+  {
+    while (Qptr != NULL)
+    {
+      Rptr -> coeff = Qptr -> coeff;
+      Rptr -> exp = Qptr -> exp;
+      Qptr = Qptr -> link;
+      HEADER = insert(HEADER, Rptr -> coeff, Rptr -> exp);
+    }
+  }
+ 
+  else
+
+  {
+    if (Qptr == NULL)
+    {
+      while (Pptr != NULL)
+      {
+        Rptr -> coeff = Pptr -> coeff;
+        Rptr -> exp = Pptr -> exp;
+        Pptr = Pptr -> link;
+        HEADER = insert(HEADER, Rptr -> coeff, Rptr -> exp);
+      }
+    }
+  }
+  return HEADER;
+}
+
+void display(struct node * HEADER)
+{
+  ptr = HEADER;
+ 
+  printf("%dx^%d", ptr -> coeff, ptr -> exp);
+  ptr = ptr -> link;
+  while (ptr != NULL)
+  {
+    printf("+%dx^%d", ptr -> coeff, ptr -> exp);
+    ptr = ptr -> link;
+  }
+  printf("\b");
+}
+
+
+
+void main()
+{
+  char c;
+  int ch;
+    PHEADER = NULL;
+    QHEADER = NULL;
+    RHEADER = NULL;
+     
+    printf("polynomial 1:\n");
+    PHEADER = create(PHEADER);
+    printf("polynomial 2:\n");
+    QHEADER = create(QHEADER);
+    RHEADER = polyadd(PHEADER, QHEADER, RHEADER);
+   
+    printf("\npolynimial 1: ");
+    display(PHEADER);
+    printf("\n");
+    printf("\npolynomial 2: ");
+    display(QHEADER);
+    printf("\n");
+    printf("\nfinal polynomial: ");
+    display(RHEADER);
+    printf("\n");
+}
