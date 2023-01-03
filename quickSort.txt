@@ -1,0 +1,72 @@
+
+
+#include <stdio.h>
+//quicksort program
+int partition(int A[50],int l,int r)
+{
+    int pivot,i,j,k;
+    pivot=A[l];
+    i=l+1;
+    j=r;
+    while(i<=j)
+    {
+        while(A[i]<=pivot && i<=r)
+        {
+            i=i+1;
+        }
+        while(A[j]>pivot)
+        {
+            j=j-1;
+        }
+        if(i<j)
+        {
+            k=A[i];
+            A[i]=A[j];
+            A[j]=k;
+        }
+    }
+    k=A[l];
+    A[l]=A[j];
+    A[j]=k;
+    return j;
+}
+
+int quicksort(int A[50],int left,int right,int n)
+{
+    int q,f;
+    if(left<right)
+    {
+        q=partition(A,left,right);
+        printf("Pass : \n");
+        for(f=0;f<n;f++)
+        {
+            printf("%d \t",A[f]);
+        }
+        printf("\n");
+        quicksort(A,left,q-1,n);
+        quicksort(A,q+1,right,n);
+    }
+}
+
+void main()
+{
+    int A[50],left=0,right,i,n;
+    printf("Enter array size: \n");
+    scanf("%d",&n);
+    printf("Enter array elements: \n");
+    for(i=0;i<n;i++)
+        scanf("%d",&A[i]);
+    printf("Unsorted array is: \n");
+    for(i=0;i<n;i++)
+        printf("%d \t",A[i]);
+    printf("\n");
+    right=n-1; //right corresponds to last index, not size
+    quicksort(A,left,right,n);
+    printf("Sorted array is: \n");
+    for(i=0;i<n;i++)
+        printf("%d \t",A[i]);
+    printf("\n");
+}
+
+
+
