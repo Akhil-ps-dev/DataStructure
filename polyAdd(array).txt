@@ -1,0 +1,119 @@
+#include<stdio.h>
+
+ 
+ struct poly
+ {
+int coeff;
+int expo;
+ };
+ 
+ struct poly X1[10],X2[10],X3[10];
+
+
+ int readPoly(struct poly []);
+ int addPoly(struct poly [],struct poly [],int ,int ,struct poly []);
+ void displayPoly( struct poly [],int terms);
+
+ int main()
+ {
+int t1,t2,t3;
+
+t1=readPoly(X1);
+printf(" \n First polynomial : ");
+displayPoly(X1,t1);
+
+t2=readPoly(X2);
+printf(" \n Second polynomial : ");
+displayPoly(X2,t2);
+
+
+t3=addPoly(X1,X2,t1,t2,X3);
+printf(" \n\n Resultant polynomial after addition : ");
+displayPoly(X3,t3);
+printf("\n");
+
+return 0;
+ }
+
+ int readPoly(struct poly X[10])
+ {
+int t1,i;
+
+printf("\n\n Enter the total number of terms in the polynomial:");
+scanf("%d",&t1);
+
+printf("\n Enter the COEFFICIENT and EXPONENT in DESCENDING ORDER\n");
+for(i=0;i<t1;i++)
+{
+printf("   Enter the Coefficient(%d): ",i+1);
+scanf("%d",&X[i].coeff);
+printf("      Enter the exponent(%d): ",i+1);
+scanf("%d",&X[i].expo);        
+}
+return(t1);
+ }
+
+ int addPoly(struct poly X1[10],struct poly X2[10],int t1,int t2,struct poly X3[10])
+ {
+int i,j,k;
+
+
+i=0;
+j=0;
+k=0;
+
+while(i<t1 && j<t2)
+{
+if(X1[i].expo==X2[j].expo)
+{
+X3[k].coeff=X1[i].coeff + X2[j].coeff;
+X3[k].expo=X1[i].expo;
+
+i++;
+j++;
+k++;
+}
+else if(X1[i].expo>X2[j].expo)
+{
+X3[k].coeff=X1[i].coeff;
+X3[k].expo=X1[i].expo;
+i++;
+k++;
+}
+else
+{
+X3[k].coeff=X2[j].coeff;
+X3[k].expo=X2[j].expo;
+j++;
+k++;
+}
+}
+
+
+while(i<t1)
+{
+X3[k].coeff=X1[i].coeff;
+X3[k].expo=X1[i].expo;
+i++;
+k++;
+}
+
+while(j<t2)
+{
+X3[k].coeff=X2[j].coeff;
+X3[k].expo=X2[j].expo;
+j++;
+k++;
+}
+
+return(k);
+ }
+
+ void displayPoly(struct poly X[10],int term)
+ {
+int k;
+
+for(k=0;k<term-1;k++)
+printf("%d(x^%d)+",X[k].coeff,X[k].expo);
+printf("%d(x^%d)",X[term-1].coeff,X[term-1].expo);
+}
