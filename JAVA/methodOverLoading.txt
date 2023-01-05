@@ -1,0 +1,36 @@
+class MethodOverLoading{
+
+
+
+void calculateArea(int x ,int y){
+System.out.println("Area of the rectangle: "+x*y+"" );
+}
+
+void calculateArea(float b, float h){
+System.out.println("Area of the triangle: "+ 0.5*b*h+"" );
+}
+
+
+void calculateArea(double r){
+System.out.println("Area of the circle :"+ 3.14*r*r+"" );
+}
+
+
+
+
+public static void main(String ar[])
+{
+
+
+MethodOverLoading ob = new MethodOverLoading();
+
+ob.calculateArea(2);
+
+ob.calculateArea(1.1f,2.2f);
+
+ob.calculateArea(1,1);
+
+
+}
+
+}

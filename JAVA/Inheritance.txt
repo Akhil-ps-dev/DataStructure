@@ -1,0 +1,58 @@
+import java.util.*;
+class Employee {
+    String name;
+    int age;
+    String address;
+    double salary;
+    int phonenumber;
+    Employee(String n, int ag, String add, double s, int ph) {
+        name = n;
+        age = ag;
+        address = add;
+        salary = s;
+        phonenumber = ph;
+    }
+    public void display() {
+        System.out.println( & quot; Name: & quot; + name);
+        System.out.println( & quot; Age: & quot; + age);
+        System.out.println( & quot; Address: & quot; + address);
+        System.out.println( & quot; Phone number: & quot; + phonenumber);
+    }
+    public void printSalary() {
+        System.out.println( & quot; Salary: & quot; + salary);
+    }
+}
+class Officer extends Employee {
+    String specialization;
+    Officer(String n, int ag, String add, double s, int ph, String spec) {
+        super(n, ag, add, s, ph);
+        specialization = spec;
+    }
+    void Officerdetails() {
+        display();
+
+        printSalary();
+        System.out.println( & quot; Specialization: & quot; + specialization);
+    }
+}
+class Manager extends Employee {
+    String department;
+    Manager(String n, int ag, String add, double s, int ph, String dept) {
+        super(n, ag, add, s, ph);
+        department = dept;
+    }
+    void Managerdetails() {
+        display();
+        printSalary();
+        System.out.println( & quot; Department: & quot; + department);
+    }
+}
+class Test {
+    public static void main(String args[]) {
+        Officer of = new Officer( & quot; Anu & quot;, 20, & quot; Newzland & quot;, 76000.00, 3638262, & quot; ENGINEER & quot;);
+        Manager mn = new Manager( & quot; Karthik & quot;, 35, & quot; London & quot;, 34000.0, 2283738, & quot; ASSISTANT & quot;);
+        System.out.println( & quot; Info about Manager: & quot;);
+        mn.Managerdetails();
+        System.out.println( & quot;\ nInfo about Officer: & quot;); of .Officerdetails();
+    }
+}
