@@ -1,0 +1,62 @@
+import java.util.Random;
+class RandomNumberThread extends Thread
+{
+public void run()
+{
+Random random=new Random();
+for(int i=0;i<4;i++)
+{
+int randomInteger=random.nextInt(100);
+System.out.println("The Random Integer generated is:"+randomInteger);
+if((randomInteger%2)==0)
+{
+SquareThread sthread=new SquareThread(randomInteger);
+sthread.start();
+}
+else
+{
+CubeThread cthread=new CubeThread(randomInteger);
+cthread.start();
+}
+try{
+Thread.sleep(1500);
+}
+catch(InterruptedException ex)
+{
+System.out.println(ex);
+}
+}
+}
+}
+class SquareThread extends Thread
+{
+int number;
+SquareThread(int randomNumber)
+{
+number=randomNumber;
+}
+public void run()
+{
+System.out.println("Square of "+number+":"+(number*number));
+}
+}
+class CubeThread extends Thread
+{
+int number;
+CubeThread(int randomNumber)
+{
+number=randomNumber;
+}
+public void run()
+{
+System.out.println("Cube of "+number+":"+(number*number*number));
+}
+}
+public class MultiThread
+{
+public static void main(String args[])
+{
+RandomNumberThread rn=new RandomNumberThread();
+rn.start();
+}
+}
