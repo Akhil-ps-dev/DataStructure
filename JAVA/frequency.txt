@@ -1,0 +1,25 @@
+
+import java.util.Scanner;
+class frequency {
+
+    public static void main(String[] args) {
+        String input;
+        int count = 0;
+        System.out.println("Please Enter the String:");
+        Scanner sc = new Scanner(System.in);
+        input = sc.nextLine();
+        String inputCopy = input.toLowerCase();
+        System.out.println("Please Enter the Character to Search:");
+        char charToSearch = sc.next().charAt(0);
+       
+        char charToSearchCopy = Character.toLowerCase(charToSearch);
+        char[] array = inputCopy.toCharArray();
+        for (char ch: array) {
+            if (ch == charToSearchCopy) {
+                count++;
+            }
+        } //end for
+
+        System.out.println("The frequency of a given character:" + charToSearch + " in the string: " + input + " is: " + count);
+    }
+}

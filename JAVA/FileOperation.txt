@@ -1,0 +1,62 @@
+import java.io.*;
+
+public class FileOperation {
+    public static void main(String args[]) throws IOException {
+        File file = new File("/home/administrator/Desktop/file.txt");
+        FileReader reader = new FileReader(file);
+        char chars[] = new char[(int) file.length()];
+        reader.read(chars);
+        File out = new File("/home/administrator/Desktop/file1.txt");
+        FileWriter writer = new FileWriter(out);
+        writer.write(chars);
+        writer.flush();
+        System.out.println("Data successfully written in the specified file");
+    }
+}
+
+
+//file excecutin
+
+
+import java.io.*;
+class FileExceptions {
+    public static void main(String[] args)
+    throws IOException {
+        int i;
+        FileInputStream fin = null;
+        FileOutputStream fout = null;
+        if (args.length != 2) {
+            System.out.println("Missing file names");
+            return;
+        }
+        try {
+            fin = new FileInputStream(args[0]);
+            fout = new FileOutputStream(args[1]);
+            do {
+                i = fin.read();
+                if (i != -1)
+                    fout.write(i);
+            }
+
+            while (i != -1);
+            System.out.println("Input was uploaded");
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found");
+        } catch (IOException e) {
+            System.out.println("I/O Error:" + e);
+        } finally {
+            try {
+                if (fin != null)
+                    fin.close();
+            } catch (IOException e2) {
+                System.out.println("Error Closing Input File");
+            }
+            try {
+                if (fout != null)
+                    fout.close();
+            } catch (IOException e2) {
+                System.out.println("Error Closing Output File");
+            }
+        }
+    }
+}
