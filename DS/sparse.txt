@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+void create_sparse(int a[10][10], int row, int column, int b[][3]) {
+  int k = 1, i, j;
+  b[0][0] = row;
+  b[0][1] = column;
+  for (i = 0; i < row; i++) {
+    for (j = 0; j < column; j++) {
+      if (a[i][j] != 0) {
+        b[k][0] = i;
+        b[k][1] = j;
+        b[k][2] = a[i][j];
+        k++;
+      }
+    }
+    b[0][2] = k - 1;
+  }
+}
+void print_sparse(int b[][3]) {
+  int i, column = b[0][2];
+  printf("Sparse form - list of triples : \n");
+  for (i = 0; i <= column; i++) {
+    printf("%d %d %d\n", b[i][0], b[i][1], b[i][2]);
+  }
+}
+void main() {
+  int a[10][10], b[20][3], row, column, i, j;
+  printf("Enter no of Rows and Columns : ");
+  scanf("%d%d", & row, & column);
+  printf("Enter Elements : ");
+  for (i = 0; i < row; i++) {
+    for (j = 0; j < column; j++) {
+      scanf("%d", & a[i][j]);
+    }
+  }
+  printf("Original Matrix : \n");
+  for (i = 0; i < row; i++) {
+    for (j = 0; j < column; j++) {
+      printf("%d ", a[i][j]);
+    }
+    printf("\n");
+  }
+  create_sparse(a, row, column, b);
+  print_sparse(b);
+}
