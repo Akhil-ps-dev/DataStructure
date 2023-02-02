@@ -1,0 +1,49 @@
+mypack/
+package Mypack;
+import java.io.*;
+public class rightangledtriangle {
+    public static void check() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int a, b, c;
+        System.out.println("Enter the sides:\n");
+        System.out.println("Side 1: ");
+        a = Integer.parseInt(br.readLine());
+        System.out.println("Side 2: ");
+        b = Integer.parseInt(br.readLine());
+        System.out.println("Side 3: ");
+        c = Integer.parseInt(br.readLine());
+        System.out.println("\n");
+        if (a > b && a > c) {
+            if ((a * a) == (b * b) + (c * c)) {
+                System.out.println("it is a right angled triangle");
+            } else {
+                System.out.println("It is not a right angled triangle");
+            }
+        }
+        if (b > a && b > c) {
+            if ((b * b) == (a * a) + (c * c)) {
+                System.out.println("it is a right angled triangle");
+            } else {
+                System.out.println("It is not a right angled triangle");
+            }
+        }
+        if (c > a && c > a) {
+            if ((c * c) == (a * a) + (b * b)) {
+                System.out.println("it is a right angled triangle");
+            } else {
+                System.out.println("It is not a right angled triangle");
+            }
+        }
+    }
+}
+//import Mypack.*;
+
+import java.io.*;
+
+class Pack{
+public static void main(String ar[])throws IOException{
+Mypack.rightangledtriangle.check();
+
+}
+
+}
