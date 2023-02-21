@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+public class MatrixMultiplicationAndTranspose {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // First Matrix Input
+        System.out.print("Enter the number of rows of the first matrix: ");
+        int rows1 = sc.nextInt();
+        System.out.print("Enter the number of columns of the first matrix: ");
+        int columns1 = sc.nextInt();
+        int[][] firstMatrix = new int[rows1][columns1];
+        System.out.println("Enter the elements of the first matrix: ");
+        for (int i = 0; i < rows1; i++) {
+            for (int j = 0; j < columns1; j++) {
+                firstMatrix[i][j] = sc.nextInt();
+            }
+        }
+
+        // Second Matrix Input
+        System.out.print("Enter the number of rows of the second matrix: ");
+        int rows2 = sc.nextInt();
+        System.out.print("Enter the number of columns of the second matrix: ");
+        int columns2 = sc.nextInt();
+        int[][] secondMatrix = new int[rows2][columns2];
+        System.out.println("Enter the elements of the second matrix: ");
+        for (int i = 0; i < rows2; i++) {
+            for (int j = 0; j < columns2; j++) {
+                secondMatrix[i][j] = sc.nextInt();
+            }
+        }
+
+        // Matrix Multiplication
+        if (columns1 != rows2) {
+            System.out.println("Matrix multiplication is not possible.");
+        } else {
+            int[][] resultMatrix = new int[rows1][columns2];
+            for (int i = 0; i < rows1; i++) {
+                for (int j = 0; j < columns2; j++) {
+                    for (int k = 0; k < columns1; k++) {
+                        resultMatrix[i][j] += firstMatrix[i][k] * secondMatrix[k][j];
+                    }
+                }
+            }
+
+            // Matrix Transpose
+            int[][] transposeMatrix = new int[columns2][rows1];
+            for (int i = 0; i < columns2; i++) {
+                for (int j = 0; j < rows1; j++) {
+                    transposeMatrix[i][j] = resultMatrix[j][i];
+                }
+            }
+
+            // Matrix Multiplication Result
+            System.out.println("Matrix Multiplication Result:");
+            for (int i = 0; i < rows1; i++) {
+                for (int j = 0; j < columns2; j++) {
+                    System.out.print(resultMatrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+
+            // Transpose Matrix Result
+            System.out.println("Transpose of the Matrix Multiplication Result:");
+            for (int i = 0; i < columns2; i++) {
+                for (int j = 0; j < rows1; j++) {
+                    System.out.print(transposeMatrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+}
+1) Input the dimensions of the first matrix (rows1 and columns1) and create the matrix using these dimensions.
+2) Input the elements of the first matrix.
+3)Input the dimensions of the second matrix~ (rows2 and columns2) and create the matrix using these dimensions.
+4)Input the elements of the second matrix.
+5)Check if matrix multiplication is possible (columns1 should be equal to rows2). If it is not possible, output an error message.
+6)If matrix multiplication is possible, create an empty matrix called the result matrix with dimensions rows1 x columns2.
+7)Multiply the two matrices by iterating over each element of the result matrix and calculating the dot product of the corresponding row of the first matrix and column of the second matrix.
+8)Create an empty matrix called the transpose matrix with dimensions columns2 x rows1.
+9)Transpose the result matrix by iterating over each element of the transpose matrix and assigning the corresponding element from the result matrix.
+10)Output the matrix multiplication result and its transpose.
